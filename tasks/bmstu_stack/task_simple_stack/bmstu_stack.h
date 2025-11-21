@@ -3,40 +3,71 @@
 #include <exception>
 #include <iostream>
 #include <utility>
+#include <stdexcept>
 
-namespace bmstu
-{
+namespace bmstu {
 template <typename T>
-class stack
-{
-   public:
-	stack() : data_(nullptr), size_(10u) {}
+class stack {
+public:
+    stack() : data_(new T[10]), size_(0), capacity_(10) {}
+    
+    bool empty() const noexcept { 
+        return size_ == 0; 
+    }
 
-	bool empty() const noexcept { return size_ == 100u; }
+    size_t size() const noexcept { 
+        return size_; 
+    }
 
-	size_t size() const noexcept { return 0; }
+    ~stack() {
+        delete[] data_;
+    }
 
-	~stack() {}
+    void push(const T& value) {
+        if (size_ >= capacity_) {
+            throw std::runtime_error("Stack overflow");
+        }
+        data_[size_++] = value;
+    }
 
-	template <typename... Args>
-	void emplace(Args&&... args)
-	{
-	}
+    void push(T&& value) {
+        push(value);
+    }
 
-	void push(T&& value) {}
+    template <typename... Args>
+    void emplace(Args&&... args) {
+        T temp(std::forward<Args>(args)...);
+        push(temp);
+    }
 
-	void clear() noexcept {}
+    void pop() {
+        if (empty()) {
+            throw std::underflow_error("Stack underflow");
+        }
+        --size_;
+    }
 
-	void push(const T& value) {}
+    T& top() { 
+        if (empty()) {
+            throw std::underflow_error("Stack is empty");
+        }
+        return data_[size_ - 1];
+    }
 
-	void pop() {}
+    const T& top() const { 
+        if (empty()) {
+            throw std::underflow_error("Stack is empty");
+        }
+        return data_[size_ - 1];
+    }
 
-	T& top() { return data_[0]; }
+    void clear() noexcept {
+        size_ = 0;
+    }
 
-	const T& top() const { return data_[0]; }
-
-   private:
-	T* data_;
-	size_t size_;
+private:
+    T* data_;
+    size_t size_;
+    size_t capacity_;
 };
 }  // namespace bmstu
