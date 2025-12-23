@@ -1,0 +1,6 @@
+services:
+  tasksimplestack:
+    image: tasksimplestack
+    build:
+      context: .
+      dockerfile: ./Dockerfile
