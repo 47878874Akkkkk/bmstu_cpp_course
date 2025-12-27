@@ -4,8 +4,7 @@
 #include <utility>
 #include <stdexcept>
 
-namespace bmstu
-{
+namespace bmstu {
 template <typename T>
 class stack
 {
@@ -147,4 +146,4 @@ public:
         size_ = 0;
     }
 };
-}
+}  // namespace bmstu
