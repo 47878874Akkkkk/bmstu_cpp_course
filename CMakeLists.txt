@@ -12,7 +12,11 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 include(GoogleTest)
 
-file(WRITE ${CMAKE_SOURCE_DIR}/.gdbinit "source gdb_printer.py\n")
+file(WRITE ${CMAKE_SOURCE_DIR}/.gdbinit "source gdb_printer.py\n")Возникло исключение: FATAL_ERROR
+CMake Error at CMakeLists.txt:15 (file):
+  file failed to open for writing (Permission denied):
+
+    /home/akhmed/bmstu_cpp_course/.gdbi
 file(WRITE ${CMAKE_SOURCE_DIR}/.lldbinit "command script import lldb_printer.py\n")
 
 if(UNIX)

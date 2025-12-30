@@ -1053,4 +1053,20 @@ build
 build/*
 .lldbinit
 .gdbinit
-build_vs
+build_vs.env
+# Скомпилированные файлы
+*.o
+*.out
+*.exe
+test_stack
+bmstu_stack
+
+# Временные файлы редакторов
+*.swp
+*~
+tempCodeRunnerFile.*
+
+# Docker файлы задания (мы их удалили)
+tasks/bmstu_stack/task_simple_stack/Dockerfile
+tasks/bmstu_stack/task_simple_stack/compose.yaml
+tasks/bmstu_stack/task_simple_stack/compose.debug.yaml
